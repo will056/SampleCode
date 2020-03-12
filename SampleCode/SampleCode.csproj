@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Примеры кода из ERP на MVC5\Controllers ERP\AllExecutedWorksJournalController.cs" />
     <Compile Include="Примеры кода из ERP на MVC5\Controllers ERP\ExecutedWorksJournalController.cs" />
     <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Context\Context.cs" />
     <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Context\Entities.cs" />
@@ -74,10 +75,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Пример Unit теста программы для расчета ЗП\UnitTestSalary.cs" />
-    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий\CollectionStrategyWorksJournal.cs" />
-    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий\IStrategyCore.cs" />
-    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий\StategyOPZ.cs" />
-    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий\StrategyLamination.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий для ExecutedWorksJournalController\CollectionStrategyWorksJournal.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий для ExecutedWorksJournalController\IStrategyCore.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий для ExecutedWorksJournalController\StategyOPZ.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий для ExecutedWorksJournalController\StrategyLamination.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

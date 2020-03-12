@@ -6,7 +6,6 @@ using System.Text;
 namespace SampleCode.Controllers_ERP
 {
     [Authorize]
-
     public class ExecutedWorksJournalController : Controller
     {
         IUnitOfWork UnitOfWork;
@@ -17,11 +16,12 @@ namespace SampleCode.Controllers_ERP
             this.UnitOfWork = UnitOfWork;
         }
 
-        [RoleAccess(Roles = "admin,chief_implantation_umj,senior_implantation_umj")]
+        [ClioAuthorization(Roles = new string[] { ConstRole.Admin, ConstRole.СhiefUMJ, ConstRole.SeniorUMJ })]
         public async System.Threading.Tasks.Task<JsonResult> DeleteImplantation(int id)
         {
             return await DeleteAsync<ImplantationWorksJournal>(id);
         }
+
 
         //Полиморфный объект общий для всех журналов выполненных работ. 
         //По тиму модели базы вызывается необходимая стратегия
