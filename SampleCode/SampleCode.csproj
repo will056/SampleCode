@@ -55,17 +55,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccessLayer ERP\Context\Context.cs" />
-    <Compile Include="DataAccessLayer ERP\Context\Entities.cs" />
-    <Compile Include="DataAccessLayer ERP\Model\IId.cs" />
-    <Compile Include="DataAccessLayer ERP\Model\IndigoWorkJournal.cs" />
-    <Compile Include="DataAccessLayer ERP\Model\RefPlastic.cs" />
-    <Compile Include="DataAccessLayer ERP\Repository\IRepository.cs" />
-    <Compile Include="DataAccessLayer ERP\Repository\RepositoryEF.cs" />
-    <Compile Include="DataAccessLayer ERP\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\Controllers ERP\ExecutedWorksJournalController.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Context\Context.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Context\Entities.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Model\IId.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Model\IndigoWorkJournal.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Model\RefPlastic.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Repository\AbstractRepositoryId.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Repository\IAbstractRepositoryId.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Repository\IRepositoryEF.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Repository\RepositoryEF.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Repository\RepositoryHousekeepingOrderWork.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Repository\RepositoryOPIWorkJournal.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Repository\RepositoryRefChip.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\Repository\RepositoryRefPlastic.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\DataAccessLayer ERP\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTestSalary.cs" />
+    <Compile Include="Пример Unit теста программы для расчета ЗП\UnitTestSalary.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий\CollectionStrategyWorksJournal.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий\IStrategyCore.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий\StategyOPZ.cs" />
+    <Compile Include="Примеры кода из ERP на MVC5\Коллекция стратегий\StrategyLamination.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

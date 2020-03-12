@@ -13,7 +13,7 @@ namespace SampleCode.DataAccessLayer_ERP.UnitOfWork
         IRepositoryAllMechinecsJournalWork RepositoryAllMechinecsJournalWork { get; }
         IRepositoryMechanicJournal RepositoryMechanicJournal { get; }
         IRepositoryMechanicOrderWork RepositoryMechanicOrderWork { get; }
-
+        IRepositoryRefChip RepositoryRefChip { get; }
         ...
     }
 }

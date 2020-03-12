@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SampleCode.DataAccessLayer_ERP.Repository
 {
@@ -13,15 +9,20 @@ namespace SampleCode.DataAccessLayer_ERP.Repository
     /// EF Базовые функции работы с моделью  
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class RepositoryEF<T> : IRepository<T>, IDisposable where T : class
+    public abstract class RepositoryEF<T> : IDisposable, IRepositoryEF<T> where T : class
     {
         public DbContext context { get; private set; }
-        protected DbSet<T> objectSet;
+        public DbSet<T> objectSet { get; private set; }
 
-        internal RepositoryEF(bool ProxyCreationEnabled = true)
-            : this(new Entities())
+        public IQueryable<T> GetIQueryable
         {
-            ((IObjectContextAdapter)context).ObjectContext.ContextOptions.ProxyCreationEnabled = ProxyCreationEnabled;
+            get { return objectSet.AsQueryable(); }
+        }
+
+        internal RepositoryEF()
+            : this(new MainContext(lazyLoadingEnabled: false))
+        {
+            ((IObjectContextAdapter)context).ObjectContext.ContextOptions.ProxyCreationEnabled = true;
         }
 
         internal RepositoryEF(DbContext _context)
@@ -40,14 +41,33 @@ namespace SampleCode.DataAccessLayer_ERP.Repository
             return objectSet.CountAsync(predicate);
         }
 
-        public virtual T First(Expression<Func<T, bool>> predicate)
+        public bool Any(Expression<Func<T, bool>> predicate)
         {
-            return objectSet.Where<T>(predicate).FirstOrDefault();
+            return objectSet.Any(predicate);
+        }
+        public Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            return objectSet.AnyAsync(predicate);
+        }
+
+        public virtual T Select(Expression<Func<T, bool>> predicate)
+        {
+            return objectSet.Where(predicate).FirstOrDefault();
         }
 
         public virtual List<T> Where(Expression<Func<T, bool>> predicate)
         {
-            return objectSet.Where<T>(predicate).ToList();
+            return objectSet.Where(predicate).ToList();
+        }
+
+        public virtual async Task<List<T>> WhereAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await objectSet.Where(predicate).ToListAsync();
+        }
+
+        public virtual T First(Expression<Func<T, bool>> predicate)
+        {
+            return objectSet.Where(predicate).FirstOrDefault();
         }
 
         public virtual void AddRange(List<T> entity)
@@ -62,26 +82,36 @@ namespace SampleCode.DataAccessLayer_ERP.Repository
 
         public abstract object Update(T entity);
 
-        public virtual void Delete(Expression<Func<T, bool>> predicate)
+        public virtual int Delete(Expression<Func<T, bool>> predicate)
         {
-            IQueryable<T> records = objectSet.Where<T>(predicate);
+            IQueryable<T> records = objectSet.Where(predicate);
             foreach (T record in records)
             {
                 objectSet.Remove(record);
             }
 
-            context.SaveChanges();
+            return context.SaveChanges();
+        }
+
+        public virtual Task<int> DeleteAsync(Expression<Func<T, bool>> predicate)
+        {
+            IQueryable<T> records = objectSet.Where(predicate);
+            foreach (T record in records)
+            {
+                objectSet.Remove(record);
+            }
+
+            return context.SaveChangesAsync();
         }
 
         public abstract object Insert(T entity);
 
         public abstract object InsertOrUpdate(T value, object id);
 
-        public IQueryable<T> SelectAllIQueryable()
+        public IQueryable<T> IQueryable
         {
-            return objectSet;
+            get { return objectSet; }
         }
-
         public List<T> SelectAll()
         {
             return objectSet.ToList();
@@ -99,14 +129,16 @@ namespace SampleCode.DataAccessLayer_ERP.Repository
 
         public void Delete(object id)
         {
+
             objectSet.Remove(SelectById(id));
             context.SaveChanges();
+
         }
 
-        public Task DeleteAsync(object id)
+        public async Task DeleteAsync(object id)
         {
-            objectSet.Remove(SelectById(id));
-            return context.SaveChangesAsync();
+            objectSet.Remove(await SelectByIdAsync(id));
+            await context.SaveChangesAsync();
         }
 
         #region Абстрактные методы для работы по id модели
